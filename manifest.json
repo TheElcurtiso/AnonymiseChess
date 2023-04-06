@@ -1,0 +1,39 @@
+{
+
+  "manifest_version": 2,
+  "name": "Anonymise Chess Players",
+  "version": "1.0",
+
+  "description": "Remove player avatars, names and ratings",
+
+  "icons": {
+    "48": "icons/beasts-48.png"
+  },
+
+  "permissions": [
+    "activeTab"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/beasts-32.png",
+    "theme_icons": [{
+        "light": "icons/beasts-32-light.png",
+        "dark": "icons/beasts-32.png",
+        "size": 32
+    }],
+    "default_title": "Beastify",
+    "default_popup": "popup/anonymise_chess.html"
+  },
+
+  "web_accessible_resources": [
+    "beasts/*.jpg"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.chess.com/*"],
+      "js": ["anonymise.js"]
+    }
+  ]
+
+}
