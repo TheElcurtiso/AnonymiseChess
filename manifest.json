@@ -7,7 +7,7 @@
   "description": "Remove player avatars, names and ratings",
 
   "icons": {
-    "48": "icons/beasts-48.png"
+    "48": "icons/ban-pawn.png"
   },
 
   "permissions": [
@@ -16,10 +16,10 @@
   ],
 
   "browser_action": {
-    "default_icon": "icons/beasts-32.png",
+    "default_icon": "icons/ban-pawn.png",
     "theme_icons": [{
-        "light": "icons/beasts-32-light.png",
-        "dark": "icons/beasts-32.png",
+        "light": "icons/ban-pawn-dark.png",
+        "dark": "icons/ban-pawn-light.png",
         "size": 32
     }],
     "default_title": "Anonymise Players",
