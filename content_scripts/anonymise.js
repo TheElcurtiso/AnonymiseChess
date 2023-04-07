@@ -1,45 +1,70 @@
-browser.runtime.onMessage.addListener((message) => {
-    
-});
-
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function setOpponentInformation(opponentInformationText, opponentInformationClass) {
-    var opponentInformation = await findOpponentInformation(opponentInformationClass);
+    var opponentInformation = findOpponentInformation();
+    if (opponentInformation == 0) return; 
+    var opponentInfo = opponentInformation.getElementsByClassName(opponentInformationClass);
     while (true) {
-        opponentInformation[0].textContent = opponentInformationText;
-        await sleep(100);
+        try {
+            opponentInfo[0].textContent = opponentInformationText;
+            await sleep(100);
+        }
+        catch {
+            console.debug("Still loading");
+            await sleep(1000);
+        }
     }
 }
 
 async function setOpponentAvatar(opponentAvatarUrl, opponentAvatarClass) {
-    var opponentAvatar = await findOpponentInformation(opponentAvatarClass);
+    var opponentInformation = findOpponentInformation();
+    if (opponentInformation == 0) return;
+    var opponentAvatar = opponentInformation.getElementsByTagName(opponentAvatarClass);
     while (true) {
-        opponentAvatar[0].src = opponentAvatarUrl;
-        opponentAvatar[0].srcset = "";
-        await sleep(100);
+        try {
+            opponentAvatar[0].src = opponentAvatarUrl;
+            await sleep(100);
+        }
+        catch {
+            console.debug("Still loading");
+            await sleep(1000);
+        }
     }
 }
 
-async function findOpponentInformation(opponentInformationClass) {
-    var findOpponentInformation = document.querySelectorAll(opponentInformationClass);
-    while (findOpponentInformation.length != 2) {
-        findOpponentInformation = document.querySelectorAll(opponentInformationClass);
+async function deleteNewGameMessage() {
+    while (true) {
+        var findOpponentInformation = document.getElementsByClassName("live-game-start-component");
+        for (let info of findOpponentInformation) {
+            info.remove();
+        }
+        
         await sleep(100);
     }
-    return findOpponentInformation;
+    
 }
 
+function findOpponentInformation() {
+    var findOpponentInformation = document.getElementsByClassName("player-component player-top");
+    if (findOpponentInformation.length == 0) {
+        console.debug("Opponent info doesn't exist, cancelling");
+        return 0;
+    }
+    return findOpponentInformation[0];
+}
+
+let opponentInformation = {};
+
+//default settings
 //set opponent rating
-setOpponentInformation("(1)", ".user-tagline-rating");
+setOpponentInformation("", "user-tagline-rating");
 
 //set opponent username
-setOpponentInformation("Opponent", ".user-username-component");
+setOpponentInformation("Opponent", "user-username-component");
 
 //set opponent avatar
-setOpponentAvatar("https://www.chess.com/bundles/web/images/user-image.svg", ".avatar-component");
+setOpponentAvatar("https://www.chess.com/bundles/web/images/user-image.svg", "img");
 
-
-
+deleteNewGameMessage();

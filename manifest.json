@@ -11,7 +11,8 @@
   },
 
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "webNavigation"
   ],
 
   "browser_action": {
@@ -21,13 +22,9 @@
         "dark": "icons/beasts-32.png",
         "size": 32
     }],
-    "default_title": "Beastify",
+    "default_title": "Anonymise Players",
     "default_popup": "popup/anonymise_chess.html"
   },
-
-  "web_accessible_resources": [
-    "beasts/*.jpg"
-  ],
 
   "content_scripts": [
     {
