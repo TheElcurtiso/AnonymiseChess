@@ -32,7 +32,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.chess.com/*"],
-      "js": ["anonymise.js"]
+      "js": ["content_scripts/anonymise.js"]
     }
   ]
 

@@ -7,14 +7,15 @@
 
   <body>
     <div id="popup-content">
-      <button>Frog</button>
-      <button>Turtle</button>
-      <button>Snake</button>
-      <button type="reset">Reset</button>
+      <input type="checkbox" id="avatar" name="avatar" value="Show/hide avatar">
+      <label for="avatar">Hide avatar</label><br>
+      <input type="checkbox" id="name" name="name" value="Show/hide name">
+      <label for="avatar">Hide name</label><br>
+      <input type="checkbox" id="rating" name="rating" value="Show/hide rating">
+      <label for="avatar">Hide rating</label><br>
     </div>
     <div id="error-content" class="hidden">
-      <p>Can't beastify this web page.</p>
-      <p>Try a different page.</p>
+      <p>Something went wrong.</p>
     </div>
     <script src="anonymise_chess.js"></script>
   </body>
