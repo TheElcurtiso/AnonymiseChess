@@ -3,29 +3,38 @@
 * the content script in the page.
 */
 function listenForClicks() {
-  document.addEventListener("click", (e) => {
-    
-    function anonymize(tabs) {
-        browser.tabs.sendMessage(tabs[0].id, {
-          command: "anonymize",
-          beastURL: url
-        });
-    }
+  function anonymize(tabs) {
+    console.debug("hello");
+      browser.tabs.sendMessage(tabs[0].id, {
+        command: "anonymize",
+        beastURL: url
+      });
+  }
 
-    /**
-    * Just log the error to the console.
-    */
-    function reportError(error) {
-      console.error(`AHHHHH: ${error}`);
-    }
+  /**
+  * Just log the error to the console.
+  */
+  function reportError(error) {
+    console.error(`AHHHHH: ${error}`);
+  }
 
-    if (e.target.type === "checkbox") {
-      browser.tabs.query({ active: true, currentWindow: true })
-        .then(anonymize)
-        .catch(reportError);
-    }
-  });
+  if (document.querySelector('.avatar').checked) {
+    console.debug("hello");
+    browser.tabs.query({ active: true, currentWindow: true })
+      .then(anonymize)
+      .catch(reportError);
+  } 
 }
+
+var checkbox = document.getElementById("avatar");
+
+checkbox.addEventListener('change', function() {
+  if (checkbox.checked) {
+    console.log("Checkbox is checked..");
+  } else {
+    console.log("Checkbox is not checked..");
+  }
+});
 
 /**
 * There was an error executing the script.
